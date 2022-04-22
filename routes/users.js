@@ -37,7 +37,7 @@ router.post("/signup", function (req, res, next) {
       })
         .then((newlyCreatedUser) => {
           //We could create a session cookie right here
-          //req.session.user = newlyCreatedUser
+          req.session.user = newlyCreatedUser;
           res.render("index", {
             message: `Welcome, ${newlyCreatedUser.fullName}!`,
           });
@@ -55,7 +55,7 @@ router.get("/login", (req, res) => {
 
 router.post("/login", (req, res) => {
   //1.Check fields are filled out
-  if (!req.body.email || !req.body.password || !req.body.fullName) {
+  if (!req.body.email || !req.body.password) {
     res.render("login", { message: "Please fill out all fields" });
   }
 

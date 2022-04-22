@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
+var roomsRouter = require("./routes/rooms");
 
 var app = express();
 require("./config/session.config")(app);
@@ -23,6 +24,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+app.use("/rooms", roomsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -41,7 +43,7 @@ app.use(function (err, req, res, next) {
 });
 
 mongoose
-  .connect("mongodb://localhost/lab-express-rooms-with-reviews")
+  .connect("mongodb://localhost/ironrooms")
   .then((x) =>
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   )
